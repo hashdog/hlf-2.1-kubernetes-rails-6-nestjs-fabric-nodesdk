@@ -1,0 +1,9 @@
+Started GET "/cable" for 10.1.17.227 at 2020-07-30 23:06:05 +0000
+Cannot render console from 192.168.65.3! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[35m (4.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/cable/" [WebSocket] for 192.168.65.3 at 2020-07-30 23:06:05 +0000
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: upgrade, HTTP_UPGRADE: websocket)
+Registered connection ({"public_id"=>"0d7e3ee50a88b56fa50177cdb2bbe39b"})
+StimulusReflex::Channel is transmitting the subscription confirmation
+StimulusReflex::Channel is streaming from StimulusReflex::Channel:{"public_id"=>"0d7e3ee50a88b56fa50177cdb2bbe39b"}

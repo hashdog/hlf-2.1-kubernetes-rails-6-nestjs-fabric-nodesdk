@@ -1,0 +1,23 @@
+app:
+  name: chaincode-rest-api
+  group: backend
+  replicaCount: 1
+  volumes:
+    - name: chaincode-rest-api-claim0
+      path: /Users/mauro/stigma/hlf-external/services/fabric-sdk-nestjs
+      mountPath: /app
+    - name: chaincode-rest-api-claim1
+      path: /Users/mauro/stigma/hlf-external/crypto-config/
+      mountPath: /app/artifacts/crypto
+
+  container:
+    image: node:12
+    args: ["sh","-c","npm install && npm run start"]
+    port: 8080
+    env:
+      - name: "NODE_ENV"
+        value: "DEV"
+  service:
+      type: ClusterIP
+      port: 8080
+

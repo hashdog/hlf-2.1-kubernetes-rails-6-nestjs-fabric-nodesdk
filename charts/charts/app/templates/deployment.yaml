@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.app.name }}
+  labels:
+    app: {{ .Values.app.name }}
+    group: {{ .Values.app.group }}
+spec:
+  replicas: {{ .Values.app.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+        group: {{ .Values.app.group }}
+    spec:
+      volumes:
+        {{- range .Values.app.volumes}}
+        - name: {{ .name }}
+          hostPath:
+            path: {{ .path }}
+        {{- end}}
+      containers:
+        - name: {{ .Values.app.name }}
+          workingDir: {{ .Values.app.container.workingDir }}  
+          image: {{ .Values.app.container.image }}  
+          args: {{  range .Values.app.container.args }}
+            - {{.}}
+          {{ end }}
+          ports:
+            - containerPort: {{ .Values.app.container.port }}
+          volumeMounts:
+          {{- range .Values.app.volumes}}
+          - mountPath: {{ .mountPath }}
+            name: {{ .name }}
+          {{- end}}
+          env:
+            {{- range .Values.app.container.env}}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end}}
+  

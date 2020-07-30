@@ -1,0 +1,11 @@
+app:
+  config:
+      data:
+        - key: RAILS_PORT
+          value: 3000
+        - key: RAILS_ENV
+          value: development
+        - key: SECRET_KEY_BASE
+          value: de5e1e813f2f5b3a7493c2e2451e887c930d2edc978aec7061ab7823d0b126f28e9c80d14b3858419fd4e805ddb038188bd6ffa58f2cc5112eeb33b9dca764f973velopment
+        - key: REDIS_URL
+          value: redis://redis:6379/0

@@ -1,0 +1,7 @@
+service:
+  name: sidekiq
+  group: backend
+  container:
+    image: chebyte/rails-app
+    args: ["sidekiq -C config/sidekiq.yml"]
+    port: 3000

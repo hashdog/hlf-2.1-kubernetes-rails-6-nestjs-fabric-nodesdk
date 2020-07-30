@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.redis.config.name }}
+  labels:
+    group: {{ .Values.redis.group }}
+data: 
+{{- range .Values.redis.config.data }}
+  {{ .key }}: {{ .value }}
+{{- end}}

@@ -1,0 +1,23 @@
+replicaCount: 1
+redis:
+  name: redis
+  group: db
+  container:
+    image: redis:5.0-alpine
+    port: 6379
+  service:
+    type: ClusterIP
+    port: 6379
+  volume:
+    name: redis-storage
+    kind: PersistentVolumeClaim
+    mountPath: /var/lib/redis/data
+    pvc:
+      name: redis-persistent-volume-claim
+      accessMode: ReadWriteOnce
+      storage: 4Gi
+  config:
+    name: redis-config
+    data:
+       - key: key
+         value: value

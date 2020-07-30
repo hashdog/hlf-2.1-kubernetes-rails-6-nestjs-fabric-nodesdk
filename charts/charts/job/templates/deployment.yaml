@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.job.name }}
+  labels:
+    app: {{ .Values.job.name }}
+    group: {{ .Values.job.group }}
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.job.name }}
+        group: {{ .Values.job.group }}
+    spec:
+      containers:
+        - name: {{ .Values.job.name }}
+          image: {{ .Values.job.container.image }}  
+          args: {{ .Values.job.container.args }}
+          ports:
+            - containerPort: {{ .Values.job.container.port }}
+          env:
+            {{- range .Values.job.container.env}}
+            - name: {{ .key | quote }}
+              value: {{ .value | quote }}
+            {{- end}}
+            {{- range .Values.app.config.data}}
+            - name: {{ .key | quote}}
+              value: {{ .value | quote }}
+            {{- end}}
+      restartPolicy: Never

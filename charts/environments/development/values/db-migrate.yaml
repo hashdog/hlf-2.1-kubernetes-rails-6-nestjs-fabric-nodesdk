@@ -1,0 +1,7 @@
+job:
+  name: db-migrate
+  group: backend
+  container:
+    image: chebyte/rails-app
+    args: ["rails db:migrate"]
+    port: 3000

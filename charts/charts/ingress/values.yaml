@@ -1,0 +1,9 @@
+ingress:
+  name: ingress-service
+  hosts:
+    - host: rails.local
+      paths: 
+        - path: /
+          backend:
+            serviceName: serviceName
+            servicePort: 8080

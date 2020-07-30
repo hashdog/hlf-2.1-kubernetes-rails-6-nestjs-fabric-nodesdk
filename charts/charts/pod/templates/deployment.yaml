@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.pod.name }}
+  labels:
+    app: {{ .Values.pod.name }}
+    group: {{ .Values.pod.group }}
+spec:
+  replicas: {{ .Values.pod.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.pod.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.pod.name }}
+        group: {{ .Values.pod.group }}
+    spec:
+      volumes:
+        {{- range .Values.pod.volumes}}
+        - name: {{ .name }}
+          hostPath:
+            path: {{ .path }}
+        {{- end}}
+      containers:
+        - name: {{ .Values.pod.name }}
+          tty: true
+          workingDir: {{ .Values.pod.container.workingDir }}  
+          image: {{ .Values.pod.container.image }}  
+          volumeMounts:
+          {{- range .Values.pod.volumes}}
+          - mountPath: {{ .mountPath }}
+            name: {{ .name }}
+          {{- end}}
+          env:
+            {{- range .Values.pod.container.env}}
+            - name: {{ .name | quote }}
+              value: {{ .value | quote }}
+            {{- end}}
+  

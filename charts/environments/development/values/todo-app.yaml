@@ -1,0 +1,25 @@
+app:
+  name: todo-app
+  group: backend
+  replicaCount: 1
+  volumes:
+    - name: todo-app-claim0
+      path: /Users/mauro/stigma/hlf-external/services/stimulus_reflex_todomvc
+      mountPath: /app
+  container:
+    image: docker.io/bitnami/rails:6-debian-10
+    args: ["sh","-c","bin/setup && bin/rails start"]
+    port: 3000
+    env:
+      - name: RAILS_PORT
+        value: 3000
+      - name: RAILS_ENV
+        value: development
+      - name: SECRET_KEY_BASE
+        value: de5e1e813f2f5b3a7493c2e2451e887c930d2edc978aec7061ab7823d0b126f28e9c80d14b3858419fd4e805ddb038188bd6ffa58f2cc5112eeb33b9dca764f973velopment
+      - name: REDIS_URL
+        value: redis://redis:6379/0
+service:
+    type: ClusterIP
+    port: 3000
+

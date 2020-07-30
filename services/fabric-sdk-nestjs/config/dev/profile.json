@@ -1,0 +1,78 @@
+{
+  "name": "Network",
+  "version": "1.0",
+  "channels": {
+    "apchannel": {
+      "orderers": [
+        "orderer0"
+      ],
+      "peers": {
+        "peer0-org1": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        }
+      }
+    }
+  },
+  "organizations": {
+    "Org1": {
+      "mspid": "org1MSP",
+      "peers": [
+        "peer0-org1"
+      ],
+      "certificateAuthorities": [
+        "peer0-org1"
+      ],
+      "adminPrivateKey": {
+        "path": "/app/artifacts/crypto/peerOrganizations/org1/users/Admin@org1/msp/keystore/priv_sk"
+      },
+      "signedCert": {
+        "path": "/app/artifacts/crypto/peerOrganizations/org1/users/Admin@org1/msp/signcerts/Admin@org1-cert.pem"
+      }
+    }
+  },
+  "orderers": {
+    "orderer0": {
+      "url": "grpcs://orderer0:7050",
+      "grpcOptions": {
+        "ssl-target-name-override": "orderer0",
+        "grpc-max-send-message-length": 4194304
+      },
+      "tlsCACerts": {
+        "path": "/app/artifacts/crypto/ordererOrganizations/consortium/orderers/orderer0/msp/tlscacerts/tlsca.consortium-cert.pem"
+      }
+    }
+  },
+  "peers": {
+    "peer0-org1": {
+      "url": "grpcs://peer0-org1:7051",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0-org1",
+        "grpc.keepalive_time_ms": 600000
+      },
+      "tlsCACerts": {
+        "path": "/app/artifacts/crypto/peerOrganizations/org1/peers/peer0-org1/msp/tlscacerts/tlsca.org1-cert.pem"
+      }
+    }
+  },
+  "certificateAuthorities": {
+    "ca-org1": {
+      "url": "https://ca-org1:7054",
+      "httpOptions": {
+        "verify": false
+      },
+      "tlsCACerts": {
+        "path": "/app/artifacts/crypto/peerOrganizations/org1/ca/ca.org1-cert.pem"
+      },
+      "registrar": [
+        {
+          "enrollId": "admin",
+          "enrollSecret": "adminpw"
+        }
+      ],
+      "caName": "ca-org1"
+    }
+  }
+}

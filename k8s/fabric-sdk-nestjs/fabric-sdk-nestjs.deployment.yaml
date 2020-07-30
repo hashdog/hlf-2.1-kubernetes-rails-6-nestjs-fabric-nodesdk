@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: chaincode-rest-api
+  name: chaincode-rest-api
+  namespace: hyperledger
+spec:
+  selector:
+    matchLabels:
+      app: chaincode-rest-api
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: chaincode-rest-api
+    spec:
+      containers:
+      - args:
+        - sh
+        - -c
+        - cd /app && npm install && npm run start
+        env:
+          - name: NODE_ENV
+            value: DEV
+        image: node:12
+        name: chaincode-rest-api
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+          - mountPath: /app
+            name: chaincode-rest-api-claim0
+          - mountPath: /app/artifacts/crypto
+            name: chaincode-rest-api-claim1
+        workingDir: /app
+      restartPolicy: Always
+      volumes:
+        - name: chaincode-rest-api-claim0
+          hostPath:
+            path: /Users/mauro/stigma/hlf-external/services/fabric-sdk-nestjs
+            type: Directory
+        - name: chaincode-rest-api-claim1
+          hostPath:
+            path: /Users/mauro/stigma/hlf-external/crypto-config
+            type: Directory

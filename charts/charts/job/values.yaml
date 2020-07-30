@@ -1,0 +1,10 @@
+job:
+  name: app
+  group: app
+  replicaCount: 1
+  container:
+    image: chebyte/rails-app:latest
+    args: []
+    env:
+       - key: key
+         value: value

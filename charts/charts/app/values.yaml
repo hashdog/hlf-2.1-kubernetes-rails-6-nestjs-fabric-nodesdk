@@ -1,0 +1,19 @@
+app:
+  name: app
+  group: app
+  replicaCount: 1
+  volumes:
+    - name: todo-app-claim0
+      app: /Users/app/services/stimulus_reflex_todomvc
+      mountPath: /app
+  container:
+    workingDir: /app
+    image: chebyte/rails-app:latest
+    args: []
+    env:
+      - name: key
+        value: value
+  service:
+    type: ClusterIP
+    port: 3000
+  
