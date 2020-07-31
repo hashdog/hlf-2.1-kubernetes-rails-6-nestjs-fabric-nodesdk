@@ -32,7 +32,7 @@ open rails.local
 
 it has to looks like this
 
-    ![todoapp](https://raw.githubusercontent.com/hashdog/hlf-2.2-docker-rails-6-nestjs-fabric-nodesdk/media/todoapp.png?raw=true)
+![todoapp](https://raw.githubusercontent.com/hashdog/hlf-2.2-docker-rails-6-nestjs-fabric-nodesdk/media/todoapp.png?raw=true)
 
 all request going to send directly to HYPERLEDGER FABRIC, if you want you can check the fabric ruby client
 
