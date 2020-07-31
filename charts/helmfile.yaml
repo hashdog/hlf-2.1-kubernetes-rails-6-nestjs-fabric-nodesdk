@@ -14,16 +14,6 @@ templates:
     - environments/{{ .Environment.Name }}/values/{{`{{ .Release.Name }}`}}.yaml
 
 releases:
-
-  # - name: redis
-  #   <<: *default
-  
-# - name: db-migrate
-#   <<: *default
-#   chart: charts/job
-#   labels:
-#     job: db-migrate
-
   - name: todo-app
     chart: charts/app
     missingFileHandler: Warn
@@ -79,17 +69,6 @@ releases:
     missingFileHandler: Warn
     values:
       - environments/{{ .Environment.Name }}/values/{{`{{ .Release.Name }}`}}.yaml
-
-      # hooks:
-  # - events: ["prepare", "cleanup"]
-  #   showlogs: true
-  #   command: "sh -c 'ls -al' "
-  #   args: ["{{`{{.Environment.Name}}`}}", "{{`{{.Release.Name}}`}}", "{{`{{.HelmfileCommand}}`}}"]
-
-
-# - name: chaincode-rest-api
-#   <<: *default
-
 
   - name: ingress-backend
     <<: *default
