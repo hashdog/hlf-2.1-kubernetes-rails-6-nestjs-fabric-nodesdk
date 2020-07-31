@@ -126,6 +126,7 @@ function cleanNetwork() {
     rm -rf ./services/stimulus_reflex_todomvc/node_modules
     rm -rf ./services/stimulus_reflex_todomvc/tmp
     rm -rf ./services/stimulus_reflex_todomvc/pids
+    rm -rf ./services/fabric-sdk-nestjs/local/
     rm -rf ./storage/*
 
 
